@@ -1,0 +1,92 @@
+body {
+  background-image: url(https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  background-size: 100% 100%;
+}
+
+.App {
+  width: 60%;
+  min-height: 500px;
+  margin: 40px auto;
+  box-shadow: 10px 10px 1 rgb(255, 255, 255);
+  padding: 10px;
+}
+
+.my_todo_list input,
+button:focus {
+  outline: none;
+}
+.my_todo_list input {
+  margin: 30px;
+  margin-left: 50px;
+  padding: 10px;
+  background-color: #f5f6fa;
+  width: 60%;
+  height: 30px;
+  font-size: 18px;
+  color: black;
+  border: 0;
+  border-radius: 10px;
+}
+.my_todo_list input::placeholder {
+  color: #888888;
+}
+.my_todo_list button {
+  background-color: #4cd137;
+  height: 50px;
+  width: 80px;
+  color: aliceblue;
+  font-size: 1rem;
+  border: 0;
+  border-radius: 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.my_todo_list span {
+  margin: 5px;
+}
+.imp_list_btn {
+  background-color: #f1c40f;
+  color: blue;
+  width: 100px;
+  height: 50px;
+  margin-left: 250px;
+  cursor: pointer;
+  border-radius: 8px;
+  text-transform: uppercase;
+}
+.callingName {
+  color: white;
+}
+@media only screen and (max-width: 600px) {
+  .App {
+    width: 60%;
+    display: block;
+  }
+  .my_todo_list button {
+    width: 80px;
+    margin-left: 100px;
+  }
+  .imp_list_btn {
+    width: 80px;
+    margin-left: 100px;
+    margin-top: 20px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .App {
+    width: 60%;
+    display: block;
+  }
+  .my_todo_list button {
+    width: 80px;
+    margin-left: 100px;
+  }
+  .imp_list_btn {
+    width: 80px;
+    margin-left: 100px;
+    margin-top: 20px;
+  }
+}

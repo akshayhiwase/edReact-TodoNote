@@ -1,0 +1,29 @@
+.list {
+  color: black;
+  width: 60%;
+  background-color: white;
+  height: 80px;
+  margin: 20px auto;
+  border-radius: 10px;
+}
+.list p {
+  padding: 10px;
+  position: relative;
+}
+.list p span {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+.list p input {
+  background-color: transparent;
+  border: 0;
+  color: black;
+  font-size: 18px;
+}
+.list p input:focus {
+  outline: none;
+}
+.imp_tag {
+  margin-right: 20px;
+}
