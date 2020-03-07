@@ -1,24 +1,30 @@
 .list {
-  color: black;
+  color: white;
   width: 60%;
-  background-color: white;
-  height: 80px;
+  height: auto;
   margin: 20px auto;
   border-radius: 10px;
 }
 .list p {
   padding: 10px;
   position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+.list h3 {
+  margin: 0;
+}
+.listTodos {
+  display: flex;
+  justify-content: space-around;
 }
 .list p span {
-  position: absolute;
-  right: 10px;
   cursor: pointer;
 }
 .list p input {
   background-color: transparent;
   border: 0;
-  color: black;
+  color: white;
   font-size: 18px;
 }
 .list p input:focus {
@@ -26,4 +32,7 @@
 }
 .imp_tag {
   margin-right: 20px;
+}
+.checkbox {
+  text-decoration: line-through;
 }

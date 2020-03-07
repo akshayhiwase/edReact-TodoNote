@@ -3,7 +3,7 @@ import NoteList from './Components/NoteList/NoteList'
 import classes from './App.module.css';
 import Time from './Components/Time/Time'
 import Todos from './Components/Todos/Todos'
-import { KEY_USERNAME } from './Components/Utils/Constants'
+import { KEY_USERNAME, KEY_WORKNOTE } from './Components/Utils/Constants'
 import { storeUserData, getUserData } from './Components/Utils/UserData'
 
 class App extends Component {
@@ -13,24 +13,24 @@ class App extends Component {
       notes: [],
       currentNote: {
         text: "",
+        key: ""
       },
       currentGreetings: getUserData(KEY_USERNAME) !== null && getUserData(KEY_USERNAME) !== "",
       curentInputVal: getUserData(KEY_USERNAME),
-      currentWhether: "",
+      currentWork: getUserData(KEY_WORKNOTE),
+      currentState: true,
+      userState: false,
     }
-
     this.handleInput = this.handleInput.bind(this)
     this.addNote = this.addNote.bind(this)
     this.deleteNotes = this.deleteNotes.bind(this)
     this.onNameSubmiting = this.onNameSubmiting.bind(this)
-
-
   }
   handleInput(e) {
     this.setState({
       currentNote: {
         text: e.target.value,
-
+        key: Date.now()
       }
     })
 
@@ -45,12 +45,12 @@ class App extends Component {
         notes: addNewNote,
         currentNote: {
           text: "",
+          key: ""
         }
 
       })
     }
   }
-
   deleteNotes(key) {
     const filterList = this.state.notes.filter(item => item.key !== key);
     this.setState({
@@ -61,8 +61,22 @@ class App extends Component {
   onNameSubmiting = (e) => {
     e.preventDefault()
     storeUserData(KEY_USERNAME, this.state.curentInputVal)
-    this.setState({ currentGreetings: true })
+    this.setState({
+      currentGreetings: true,
+      userState: true
+    })
 
+  }
+  noteClicked = () => {
+    return (classes.checkbox)
+  }
+  onJobSubmiting = (e) => {
+    e.preventDefault()
+    this.setState({ currentState: false })
+    storeUserData(KEY_WORKNOTE, this.state.currentWork)
+  }
+  onJobChange = (e) => {
+    this.setState({ currentWork: e.target.value })
   }
   onInputChange = (e) => {
     this.setState({ curentInputVal: e.target.value })
@@ -99,32 +113,39 @@ class App extends Component {
     return (
       <div className={classes.App}>
         <div className={[classes.bgImage, this.getBackgroundImageForCurrentTime()].join(" ")}>
-
           <div className={classes.noteContainer}>
-
-
             <Time />
             <div className={classes.mainNote}>
               {
                 this.state.currentGreetings ? <h1>{this.getCurrentGreetings()} , {this.state.curentInputVal}</h1> :
                   <div>
                     <h1>What Do you like to call??</h1>
-
                     <form action="" onSubmit={this.onNameSubmiting}>
-
                       <input type="text" onChange={this.onInputChange} value={this.state.curentInputVal} />
                     </form>
                   </div>
               }
-
-
-
-
+              {
+                this.state.userState ?
+                  <div >
+                    {
+                      this.state.currentState ?
+                        <div>
+                          <h1>What's Your Main Focus Today</h1>
+                          <form action="" onSubmit={this.onJobSubmiting}>
+                            <input type="text" onChange={this.onJobChange} value={this.state.currentWork} />
+                          </form>
+                        </div>
+                        :
+                        <h1>{this.state.currentWork}</h1>
+                    }
+                  </div> : null
+              }
             </div>
           </div>
           <div className={classes.todoList}>
             <Todos addNote={this.addNote} handleInput={this.handleInput} text={this.state.currentNote.text} />
-            <NoteList items={this.state.notes} deletItem={this.deleteNotes} setUpdate={this.setUpdate} />
+            <NoteList items={this.state.notes} deletItem={this.deleteNotes} setUpdate={this.setUpdate} clickedNote={this.noteClicked} />
           </div>
 
         </div>

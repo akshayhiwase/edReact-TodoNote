@@ -18,7 +18,11 @@
   align-items: center;
   flex-direction: column;
 }
+.workContainer {
+  display: none;
+}
 .todoList {
+  background-color: black;
   display: flex;
   justify-content: flex-end;
   flex-direction: column-reverse;
@@ -26,14 +30,17 @@
   right: 0;
   bottom: 0;
 }
+.checkbox {
+  text-decoration: line-through;
+}
 .bgImageEvening {
-  background-image: url(https://lh3.googleusercontent.com/proxy/uO-OSyTNCvfuWPT-vhKXHHIPqKD_BhLkpT9MEs6OqVXpl6oVnCtJgvjFvqJ_tcHYQVp5e8ptHXVADGLhYdC_fsTJ2FY_Ck92hL5lAhXj3IXWeSMGnfOcPVdmUAOo7k9K6tPH0Uy5N_o);
+  background-image: url(https://c1.wallpaperflare.com/preview/910/78/540/sunset-evening-sky-beach-background.jpg);
 }
 .bgImageMorning {
   background-image: url(https://image.shutterstock.com/image-photo/empty-wooden-table-autumn-catering-260nw-470540738.jpg);
 }
 .bgImageAfternoon {
-  background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b8731df0-7a59-40a1-b063-eb83a1db366b/d6fmzr-33823420-eca2-4db8-998a-b8f6ff4de4f2.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2I4NzMxZGYwLTdhNTktNDBhMS1iMDYzLWViODNhMWRiMzY2YlwvZDZmbXpyLTMzODIzNDIwLWVjYTItNGRiOC05OThhLWI4ZjZmZjRkZTRmMi5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.Iwj25dRfTwQFUbTz9KARq3Na7FAOGVxe7-c0lZHNHpE);
+  background-image: url(https://www.liberaldictionary.com/wp-content/uploads/2019/02/afternoon-0916.jpg);
 }
 .bgImageNight {
   background-image: url(https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);

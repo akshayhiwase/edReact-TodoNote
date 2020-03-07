@@ -6,11 +6,12 @@ const NoteListItems = (props) => {
     const listItems = lists.map(item => {
         return (
             <div className={classes.list} key={item.key}>
-                <p>
-                    <input type="text" value={item.text} onChange={(e) => props.setUpdate(e.target.value, item.key)} />
+                <div className={[classes.listTodos, props.clickedNote].join(' ')} onClick={props.clickedNote}>
+                    <input type="checkbox" />
+                    <h3>{item.text}</h3>
                     <span onClick={() => props.deletItem(item.key)}><i className="fas fa-trash"></i></span>
-                    {/* <span className={classes.imp_tag} onClick={() => props.impNoteAdd(item.key)}><i className="fas fa-star"></i></span> */}
-                </p>
+
+                </div>
             </div>
         )
     })
