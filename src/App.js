@@ -3,7 +3,8 @@ import NoteList from './Components/NoteList/NoteList'
 import classes from './App.module.css';
 import Time from './Components/Time/Time'
 import Todos from './Components/Todos/Todos'
-
+import { KEY_USERNAME } from './Components/Utils/Constants'
+import { storeUserData, getUserData } from './Components/Utils/UserData'
 
 class App extends Component {
   constructor(props) {
@@ -13,14 +14,15 @@ class App extends Component {
       currentNote: {
         text: "",
       },
-      user: false,
-      userName: " ",
-      currentWhether: " ",
+      currentGreetings: getUserData(KEY_USERNAME) !== null && getUserData(KEY_USERNAME) !== "",
+      curentInputVal: getUserData(KEY_USERNAME),
+      currentWhether: "",
     }
+
     this.handleInput = this.handleInput.bind(this)
     this.addNote = this.addNote.bind(this)
     this.deleteNotes = this.deleteNotes.bind(this)
-    this.setUpdate = this.setUpdate.bind(this);
+    this.onNameSubmiting = this.onNameSubmiting.bind(this)
 
 
   }
@@ -28,7 +30,7 @@ class App extends Component {
     this.setState({
       currentNote: {
         text: e.target.value,
-        key: Date.now()
+
       }
     })
 
@@ -56,31 +58,76 @@ class App extends Component {
     })
   }
 
-  setUpdate(text, key) {
-    const items = this.state.notes;
-    items.map(item => {
-      if (item.key === key) {
-        item.text = text
-      }
-    })
-    this.setState({
-      notes: items
-    })
+  onNameSubmiting = (e) => {
+    e.preventDefault()
+    storeUserData(KEY_USERNAME, this.state.curentInputVal)
+    this.setState({ currentGreetings: true })
+
   }
+  onInputChange = (e) => {
+    this.setState({ curentInputVal: e.target.value })
+  }
+  getBackgroundImageForCurrentTime = () => {
+    const currentHours = new Date().getHours()
+    if (currentHours >= 0 && currentHours < 12) {
+      return (classes.bgImageMorning)
+    } else if (currentHours >= 12 && currentHours < 16) {
+      return (classes.bgImageAfternoon)
+    } else if (currentHours >= 16 && currentHours < 22) {
+      return (classes.bgImageEvening)
+
+    } else {
+      return (classes.bgImageNight)
+    }
+  }
+  getCurrentGreetings = () => {
+    const currentHours = new Date().getHours()
+    if (currentHours >= 0 && currentHours < 12) {
+      return "Good Morning"
+    } else if (currentHours >= 12 && currentHours < 16) {
+      return "Good Afternoon"
+    } else if (currentHours >= 16 && currentHours < 22) {
+      return "Good Evening"
+
+    } else {
+      return "Good Night"
+    }
+  }
+
 
   render() {
     return (
       <div className={classes.App}>
+        <div className={[classes.bgImage, this.getBackgroundImageForCurrentTime()].join(" ")}>
 
-        <Time />
-        <div className={classes.callingName}>
-          {
-            this.state.user ? <h1>{this.state.currentWhether + this.state.userName}</h1> : <h1>What do you like to be called</h1>
-          }
+          <div className={classes.noteContainer}>
+
+
+            <Time />
+            <div className={classes.mainNote}>
+              {
+                this.state.currentGreetings ? <h1>{this.getCurrentGreetings()} , {this.state.curentInputVal}</h1> :
+                  <div>
+                    <h1>What Do you like to call??</h1>
+
+                    <form action="" onSubmit={this.onNameSubmiting}>
+
+                      <input type="text" onChange={this.onInputChange} value={this.state.curentInputVal} />
+                    </form>
+                  </div>
+              }
+
+
+
+
+            </div>
+          </div>
+          <div className={classes.todoList}>
+            <Todos addNote={this.addNote} handleInput={this.handleInput} text={this.state.currentNote.text} />
+            <NoteList items={this.state.notes} deletItem={this.deleteNotes} setUpdate={this.setUpdate} />
+          </div>
+
         </div>
-        <Todos addNote={this.addNote} handleInput={this.handleInput} text={this.state.currentNote.text} />
-
-        <NoteList items={this.state.notes} deletItem={this.deleteNotes} setUpdate={this.setUpdate} />
       </div>
     );
   }
