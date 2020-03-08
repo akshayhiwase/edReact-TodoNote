@@ -83,7 +83,7 @@ class App extends Component {
   }
   getBackgroundImageForCurrentTime = () => {
     const currentHours = new Date().getHours()
-    if (currentHours >= 0 && currentHours < 12) {
+    if (currentHours >= 4 && currentHours < 12) {
       return (classes.bgImageMorning)
     } else if (currentHours >= 12 && currentHours < 16) {
       return (classes.bgImageAfternoon)
@@ -96,7 +96,7 @@ class App extends Component {
   }
   getCurrentGreetings = () => {
     const currentHours = new Date().getHours()
-    if (currentHours >= 0 && currentHours < 12) {
+    if (currentHours >= 4 && currentHours < 12) {
       return "Good Morning"
     } else if (currentHours >= 12 && currentHours < 16) {
       return "Good Afternoon"
@@ -137,7 +137,12 @@ class App extends Component {
                           </form>
                         </div>
                         :
-                        <h1>{this.state.currentWork}</h1>
+                        <div className={classes.dayNote}>
+                          <input type="checkbox" className={classes.dayNoteMark} />
+                          <h1>{this.state.currentWork}</h1>
+                          <span ><i className="fas fa-trash"></i></span>
+                        </div>
+
                     }
                   </div> : null
               }

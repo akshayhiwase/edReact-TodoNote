@@ -28,3 +28,6 @@ button:focus {
   width: 68%;
   height: auto;
 }
+.todoContainer h3 {
+  color: white;
+}
